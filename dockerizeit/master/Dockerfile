@@ -1,4 +1,4 @@
-FROM jenkins:2.46.3-alpine
+FROM jenkins/jenkins:lts
 
 # Add support for proxies.
 # Values should be passed as build args
@@ -18,7 +18,7 @@ ENV master_image_version $master_image_version
 
 # Install plugins
 COPY plugins.txt /usr/share/jenkins/plugins.txt
-RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
+RUN /usr/local/bin/plugins.sh < /usr/share/jenkins/plugins.txt
 
 # Copy configuration scripts that will be executed by groovy
 COPY *.groovy /usr/share/jenkins/ref/init.groovy.d/
